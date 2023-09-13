@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Swagger UI</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.5.0/swagger-ui.css" >
+</head>
+<body>
+
+<div id="swagger-ui"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.5.0/swagger-ui-bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.5.0/swagger-ui-standalone-preset.js"></script>
+<script>
+window.onload = function() {
+
+  let spec = {"openapi": "3.0.0", "info": {"version": "1.0.1", "title": "Podcast API", "description": "Podcast API", "contact": {"name": "Guillaume Lachance"}}, "paths": {"/auth/token": {"post": {"summary": "Route pour cr\u00c3\u00a9er un jeton d'authentification", "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/TokenCreationPayload"}}}}, "responses": {"200": {"description": "La r\u00c3\u00a9ponse lorsque le jeton est cr\u00c3\u00a9\u00c3\u00a9.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/TokenCreationResponse"}}}}, "401": {"description": "Non autoris\u00c3\u00a9", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/QuatreCentUn"}}}}}}}, "/auth/register/": {"post": {"summary": "Route pour cr\u00c3\u00a9er un utilisateur", "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/UserCreationPayload"}}}}, "responses": {"201": {"description": "La r\u00c3\u00a9ponse lorsque l'utilisateur est cr\u00c3\u00a9\u00c3\u00a9.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/UserCreationResponse"}}}}, "400": {"description": "Une erreur s'est produite pendant le insert", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ErrorMessage"}}}}}}}, "/user": {"get": {"security": [{"bearerAuth": []}], "summary": "Retourne les informations de l'utilisateur pr\u00c3\u00a9sentement connect\u00c3\u00a9", "responses": {"200": {"description": "Les informations de l'utilisateur pr\u00c3\u00a9sentement connect\u00c3\u00a9", "content": {"application/json": {"schema": {"type": "object", "$ref": "#/components/schemas/userGetInfo"}}}}, "401": {"description": "Not authorized", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/QuatreCentUn"}}}}, "404": {"description": "Not authorized. L'utilisateur n'existe plus.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ErrorMessage"}}}}}}}, "/users": {"get": {"summary": "Retourne la liste des utilisateurs", "responses": {"200": {"description": "La liste des utilisateurs", "content": {"application/json": {"schema": {"type": "array", "example": [{"userid": 1, "email": "glachance@cmaisonneuve.qc.ca"}, {"userid": 2, "email": "marc@cmaisonneuve.qc.ca"}, {"userid": 3, "email": "e1234567@cmaisonneuve.qc.ca"}]}}}}, "401": {"description": "Not authorized", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/QuatreCentUn"}}}}}}}}, "components": {"securitySchemes": {"bearerAuth": {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"}}, "schemas": {"TokenCreationPayload": {"type": "object", "required": ["email", "password"], "properties": {"email": {"type": "string"}, "password": {"type": "string"}}, "example": {"email": "e1234567@site.com", "password": "eE1234567!"}}, "TokenCreationResponse": {"type": "object", "required": ["token"], "properties": {"token": {"type": "string"}}, "example": {"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjIsIm5hbWUiOiJNYXJpZSBDdXJpZSIsImVtYWlsIjoibWFjdXJpZUBzY2llbmNlLmNvbSIsImlhdCI6MTYxOTIyNjkxNn0.Nn0SP4ZzW4jaOu_Q47Cq-NPm545zfxJmY7ww7GWyJL0"}}, "ErrorMessage": {"type": "object", "required": ["message"], "properties": {"message": {"type": "string"}}, "example": {"message": "Un message d'erreur descriptif."}}, "QuatreCentUn": {"type": "object", "required": ["message"], "properties": {"message": {"type": "string"}}, "example": {"message": "Not Authorized."}}, "UserCreationPayload": {"type": "object", "required": ["email", "password"], "properties": {"name": {"type": "string"}, "email": {"type": "string"}, "password": {"type": "string"}}, "example": {"email": "e1234567@site.com", "password": "eE1234567!"}}, "UserCreationResponse": {"type": "object", "required": ["userid", "email"], "properties": {"userid": {"type": "number"}, "email": {"type": "string"}}, "example": {"userid": 1, "email": "e1234567@site.com"}}, "User": {"type": "object", "required": ["user"], "properties": {"user": {"type": "object", "required": ["userid", "email"], "properties": {"userid": {"type": "number"}, "email": {"type": "string"}}, "example": {"userid": 1, "email": "e1234567@site.com"}}}}, "userGetInfo": {"type": "object", "required": ["userId", "email"], "properties": {"userId": {"type": "number"}, "email": {"type": "string"}}, "example": {"userId": 1, "email": "e1234567@site.com"}}, "HashResponse": {"type": "object", "required": ["hash"], "properties": {"hash": {"type": "string"}}, "example": {"hash": "$2b$08$LmR4pF7DQaYe2YiO93OoWOap7xfQRTkwn1inNHmiJdk6wYYcLrVHa"}}}}};
+
+  let str = JSON.stringify(spec);
+  str = str.replaceAll('\u00c3\u00a9', 'é');
+  str = str.replaceAll('\u00c3\u00a8', 'è');
+  str = str.replaceAll('\u00c3\u00a7', 'ç');
+  str = str.replaceAll('\u00c3\u00a0', 'à');
+  str = str.replaceAll('\u00c3\u00a2', 'â');
+  str = str.replaceAll('\u00c3\u2030', 'É');
+  spec = JSON.parse(str);
+
+  // Build a system
+  window.ui = SwaggerUIBundle({
+    spec: spec,
+    dom_id: '#swagger-ui',
+    deepLinking: true,
+    presets: [
+      SwaggerUIBundle.presets.apis,
+      SwaggerUIStandalonePreset
+    ],
+    plugins: [
+      SwaggerUIBundle.plugins.DownloadUrl
+    ],
+    layout: "StandaloneLayout"
+  })
+}
+</script>
+</body>
+
+</html>

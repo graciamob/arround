@@ -1,0 +1,36 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "func-names": "off",
+    "linebreak-style": "off",
+    "no-console": "off",
+    "no-plusplus": "off",
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ],
+    "no-var": "error",
+    "operator-assignment": "off",
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "semi": [
+      2,
+      "always"
+    ]
+  }
+}
