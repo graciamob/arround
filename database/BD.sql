@@ -1,7 +1,4 @@
---ALTER SERVER ROLE  [dbcreator]  ADD MEMBER [yolande];GO
-Create Database projet3
-go
-use projet3
+use [5D1gr01e03]
 
 CREATE TABLE [dbo].[Utilisateurs](
 	[id_Utilisateur] int primary key identity NOT NULL,
@@ -12,7 +9,7 @@ CREATE TABLE [dbo].[Utilisateurs](
 GO
 CREATE TABLE [dbo].[Categories](
 	[id_categories] [int] primary key identity not NULL,
-	[nom_categories] [varchar](50) NULL
+	[nom_categories] [varchar](50) not NULL
 ) 
 GO
 
@@ -36,7 +33,7 @@ CREATE TABLE [dbo].[Reviews](
 	[id_Utilisateur] int foreign key(id_Utilisateur) References Utilisateurs(id_utilisateur) NOT NULL,
 	[id_lieu] varchar(50) not null,
 	[commentaire] [varchar](50) NOT NULL,
-	[note] int not null,-- SET note = FLOOR(RAND() * 5) + 1;
+	[note] int check (note in (1, 2, 3, 4, 5)) not null,
 	[photo] [varchar](50) NULL,
 	)
 GO
