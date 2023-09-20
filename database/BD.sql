@@ -3,6 +3,7 @@ use [5D1gr01e03]
 CREATE TABLE [dbo].[Utilisateurs](
 	[idUtilisateur] int primary key identity NOT NULL,
 	[username] [varchar](50) NOT NULL,
+	[email] [varchar](50) NOT NULL,
 	[nom] [varchar](50) NOT NULL,
 	[motDePasse] [varchar](50) NOT NULL,
 	[photoProfil] [varchar](50) NULL
