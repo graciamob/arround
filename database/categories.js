@@ -4,21 +4,21 @@ const dbConnection = require("../modules/db");
 const knex = knexModule(dbConnection);
 
 // fonctions get
-function getCategoriesAll(){
+function getCategoriesAll() {
     return knex("Categories");
 }
 
-function getCategorieParId(idCategorie){
+function getCategorieParId(idCategorie) {
     return knex("Categories")
     .where("idCategorie", idCategorie);
 }
 
-function getCategorieParNom(nomCategorie){
+function getCategorieParNom(nomCategorie) {
     return knex("Categories")
     .where("nomCategorie", nomCategorie);
 }
 
-function getCategoriesUtilisateur(idUtilisateur){
+function getCategoriesUtilisateur(idUtilisateur) {
     return knex("UtilisateurCategorie")
     .where("idUtilisateur", idUtilisateur);
 }
