@@ -1,5 +1,3 @@
-// noinspection ExceptionCaughtLocallyJS
-
 const jwt = require("jsonwebtoken");
 const db = require("./db");
 
