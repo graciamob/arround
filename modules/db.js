@@ -1,6 +1,4 @@
-const knexModule = require("knex");
-
-const dbConnection = knexModule({
+const dbConnection = {
     client: "mssql",
     connection: {
         host:"deptinf.cmaisonneuve.qc.ca",
@@ -12,7 +10,7 @@ const dbConnection = knexModule({
             encrypt: false,
         },
     },
-});
+};
 
 
 module.exports = dbConnection;

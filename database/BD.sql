@@ -5,8 +5,8 @@ CREATE TABLE [dbo].[Utilisateurs](
 	[username] [varchar](50) NOT NULL,
 	[email] [varchar](50) NOT NULL,
 	[nom] [varchar](50) NOT NULL,
-	[motDePasse] [varchar](50) NOT NULL,
-	[photoProfil] [varchar](50) NULL
+	[motDePasse] [varchar](90) NOT NULL,
+	[photoProfil] [varchar](90) NULL
 )
 GO
 
@@ -27,6 +27,7 @@ CREATE TABLE [dbo].[Photos](
 	[idUtilisateur] int foreign key(idUtilisateur) references Utilisateurs(idUtilisateur),
 	[date] [date] NOT NULL,
 	[idLieu] varchar(50) not null,
+	[photoURL] varchar(90) NOT NULL,
 ) ON [PRIMARY]
 GO
 
@@ -35,10 +36,12 @@ CREATE TABLE [dbo].[Reviews](
 	[date] [date] NOT NULL,
 	[idUtilisateur] int foreign key(idUtilisateur) References Utilisateurs(idUtilisateur) NOT NULL,
 	[idLieu] varchar(50) not null,
-	[commentaire] [varchar](50) NOT NULL,
+	[commentaire] [varchar](150) NOT NULL,
 	[note] int check (note in (1, 2, 3, 4, 5)) not null,
 	[photo] [varchar](50) NULL,
 	)
 GO
 
-
+insert into Categories values ('restaurant')
+insert into Categories values ('cafe')
+insert into Categories values ('bar')
