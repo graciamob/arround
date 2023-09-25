@@ -72,7 +72,7 @@ try {
         photo: req.body.photo
     };
 
-    const resultat = await request.insertUtilisateur(review);
+    const resultat = await request.insertReview(review);
     return res.status(200).json(resultat);
 } catch (error) {
     return res.status(500).json({ message: error.message });
