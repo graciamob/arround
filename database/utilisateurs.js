@@ -8,21 +8,21 @@ function getUtilisateursAll(){
     return knex("Utilisateurs");
 }
 
-function connexion(username, motDePasse){
-    return knex("Utilisateurs")
-    .where("username", username)
-    .andWhere("motDePasse", motDePasse);
-}
-
 function getUtilisateur(idUtilisateur){
     return knex("Utilisateurs")
     .where("idUtilisateur", idUtilisateur);
 }
 
+function getUtilisateurParEmail(email){
+    return knex("Utilisateurs")
+    .where("email", email);
+}
+
 // fonctions d'ajout
 function insertUtilisateur(utilisateur){
     return knex("Utilisateurs")
-    .insert(utilisateur);
+    .insert(utilisateur)
+    .returning("*");
 }
 
 // fonctions de modification
@@ -43,7 +43,7 @@ async function deleteUtilisateur(idUtilisateur){
 module.exports = {
     getUtilisateursAll,
     getUtilisateur,
-    connexion,
+    getUtilisateurParEmail,
     insertUtilisateur,
     updateUtilisateur,
     deleteUtilisateur,
