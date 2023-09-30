@@ -69,8 +69,8 @@ router.delete("/:idUtilisateur", async(req, res) => {
             return res.status(404).json({ message: "L'utilisateur n'a pas été trouvé." });
         }
 
-        const resultat = await request.deleteUtilisateur(idUtilisateur);
-        return res.status(200).json(resultat);
+        await request.deleteUtilisateur(idUtilisateur);
+        return res.status(200).json("Le compte a été supprimé.");
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
