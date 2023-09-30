@@ -26,7 +26,7 @@ router.get("/utilisateur/:idUtilisateur", async(req, res) => {
         return res.status(400).json({ message: "Paramètre invalide ou manquant." });
     }
     try {
-        const resultat = await request.getUtilisateur(idUtilisateur);
+        const resultat = await request.getPhotosUtilisateur(idUtilisateur);
         if (!resultat.length) {
             return res.status(404).json({ message: "Cet utilisateur n'a pas de photos." });
         }
