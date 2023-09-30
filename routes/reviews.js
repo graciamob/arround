@@ -3,14 +3,14 @@ const request = require("../database/reviews");
 
 const router = express.Router();
 
-router.get("/:idReview", async(req, res) => {
-    const { idReview } = req.params;
-    if (!+(idReview)) {
+router.get("/:idReviews", async(req, res) => {
+    const { idReviews } = req.params;
+    if (!+(idReviews)) {
         return res.status(400).json({ message: "Paramètre invalide ou manquant." });
     }
 
     try {
-        const resultat = await request.getReviewsParId(idReview);
+        const resultat = await request.getReviewsParId(idReviews);
         if (!resultat.length) {
             return res.status(404).json({ message: "Le review n'a pas été trouvé." });
         }
@@ -79,20 +79,20 @@ try {
 }
 });
 
-router.delete("/:idReview", async(req, res) => {
-    const { idReview } = req.params;
-    if (!+(idReview)) {
+router.delete("/:idReviews", async(req, res) => {
+    const { idReviews } = req.params;
+    if (!+(idReviews)) {
         return res.status(400).json({ message: "Paramètre invalide ou manquant." });
     }
 
     try {
-        const review = await request.getReviewsParId(idReview);
+        const review = await request.getReviewsParId(idReviews);
         if (!review.length) {
             return res.status(404).json({ message: "Le review n'a pas été trouvé." });
         }
 
-        const resultat = await request.deleteReview(idReview);
-        return res.status(200).json(resultat);
+        await request.deleteReview(idReviews);
+        return res.status(200).json("Le review a été supprimé.");
     } catch(error) {
         return res.status(500).json({ message: error.message });
     }

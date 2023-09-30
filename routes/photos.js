@@ -86,8 +86,8 @@ router.delete("/:idPhoto", async(req, res) => {
             return res.status(404).json({ message: "La photo n'a pas été trouvée." });
         }
 
-        const resultat = await request.deletePhoto(idPhoto);
-        return res.status(200).json(resultat);
+        await request.deletePhoto(idPhoto);
+        return res.status(200).json("La photo a été supprimée.");
     } catch(error) {
         return res.status(500).json({ message: error.message });
     }
