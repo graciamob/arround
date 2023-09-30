@@ -26,7 +26,7 @@ router.get("/utilisateur/:idUtilisateur", async(req, res) => {
         return res.status(400).json({ message: "Paramètre invalide ou manquant." });
     }
     try {
-        const resultat = await request.getUtilisateur(idUtilisateur);
+        const resultat = await request.getPhotosUtilisateur(idUtilisateur);
         if (!resultat.length) {
             return res.status(404).json({ message: "Cet utilisateur n'a pas de photos." });
         }
@@ -86,8 +86,8 @@ router.delete("/:idPhoto", async(req, res) => {
             return res.status(404).json({ message: "La photo n'a pas été trouvée." });
         }
 
-        const resultat = await request.deletePhoto(idPhoto);
-        return res.status(200).json(resultat);
+        await request.deletePhoto(idPhoto);
+        return res.status(200).json("La photo a été supprimée.");
     } catch(error) {
         return res.status(500).json({ message: error.message });
     }

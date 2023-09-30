@@ -26,23 +26,24 @@ async function getReviewsUtilisateurParLieu(idUtilisateur, idLieu) {
 }
 
 // fonctions d'ajout
-async function insertReview(review){
+async function insertReview(review) {
     return knex("Reviews")
-    .insert(review);
+    .insert(review)
+    .returning("*");
 }
 
 // fonctions de modification
-function updateReview(review, idReview){
+function updateReview(review, idReviews) {
     return knex("Reviews")
-    .where("idReview", idReview)
+    .where("idReviews", idReviews)
     .update(review)
     .returning("*");
 }
 
 // fonctions de suppression
-async function deleteReview(idReview){
+async function deleteReview(idReviews) {
     return knex("Reviews")
-    .where("idReview", idReview)
+    .where("idReviews", idReviews)
     .del();
 }
 
