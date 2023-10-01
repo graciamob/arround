@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 // express authentification middleware
 const authentification = (req, res, next) => {
-    const token = req.session.token || req.headers.authorization;
+    const token = req.headers.authorization;
     if (token) {
         jwt.verify(token, process.env.TOKEN_KEY, (err, decoded) => {
             if (err) {

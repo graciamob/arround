@@ -23,8 +23,7 @@ router.post("/", async(req, res) => {
             process.env.TOKEN_KEY,
             { expiresIn },
         );
-        req.session.token = accessToken;
-        return res.status(200).json({ token: accessToken });
+        return res.status(200).json({ idUtilisateur: user[0].idUtilisateur, token: accessToken });
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }

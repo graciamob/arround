@@ -3,7 +3,6 @@ require("dotenv").config();
 
 const app = express();
 const cors = require("cors");
-const session = require("express-session");
 const auth = require("./modules/auth-middleware");
 
 const PORT = process.env.PORT || 3000;
@@ -19,8 +18,6 @@ app.use(cors());
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-app.use(session({ secret: process.env.TOKEN_KEY }));
 
 app.use("/connexion", connexionRouter);
 app.use("/inscription", inscriptionRouter);
