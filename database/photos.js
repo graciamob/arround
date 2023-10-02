@@ -35,7 +35,8 @@ async function getPhotoParId(idPhoto){
 // fonctions d'ajout
 async function insertPhoto(photo){
     return knex("Photos")
-    .insert(photo);
+    .insert(photo)
+    .returning("*");
 }
 
 // fonctions de suppression
