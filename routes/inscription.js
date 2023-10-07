@@ -19,7 +19,7 @@ router.post("/", async(req, res) => {
         };
 
         const resultat = await request.insertUtilisateur(utilisateur);
-        return res.status(200).json(resultat);
+        return res.status(200).json(resultat[0]);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
