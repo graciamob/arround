@@ -13,8 +13,8 @@ GO
 CREATE TABLE [dbo].[Categories](
 	[idCategorie] [int] primary key identity not NULL,
 	[nomCategorie] [varchar](50) not NULL,
-	[description] [varchar](90) not NULL,
-	[img] [varchar](90) NULL
+	[description] [varchar](150) not NULL,
+	[img] [varchar](500) NULL
 ) 
 GO
 
