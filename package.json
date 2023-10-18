@@ -4,7 +4,7 @@
     "description": "exemple API",
     "main": "index.js",
     "scripts": {
-        "start": "node_modules/.bin/nodemon index.js",
+        "start": "nodemon index.js",
         "lint": "npx eslint ./**/*.js --fix"
     },
     "author": "you",
