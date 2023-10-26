@@ -14,7 +14,8 @@ CREATE TABLE [dbo].[Categories](
 	[idCategorie] [int] primary key identity not NULL,
 	[nomCategorie] [varchar](50) not NULL,
 	[description] [varchar](150) not NULL,
-	[img] [varchar](500) NULL
+	[img] [varchar](500) NULL,
+	[nom] [varchar](50) NOT NULL
 ) 
 GO
 
