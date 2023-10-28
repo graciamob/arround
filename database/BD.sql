@@ -42,6 +42,8 @@ CREATE TABLE [dbo].[Reviews](
 	[commentaire] [varchar](150) NOT NULL,
 	[note] int check (note in (1, 2, 3, 4, 5)) not null,
 	[photo] [varchar](50) NULL,
+	[username] varchar(50) not null,
+	[nomLieu] varchar(80) not null
 	)
 GO
 

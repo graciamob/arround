@@ -58,7 +58,7 @@ router.get("/utilisateur/:idUtilisateur", async(req, res) => {
 
 router.post("/", async(req, res) => {
     if (!req.body.date || !req.body.idUtilisateur || !req.body.idLieu || !req.body.commentaire
-        || !req.body.note || !req.body.username) {
+        || !req.body.note || !req.body.username || !req.body.nomLieu) {
         return res.status(400).json({ message: "Paramètre(s) sont manquants" });
 }
 
@@ -70,7 +70,8 @@ try {
         commentaire: req.body.commentaire,
         note: req.body.note,
         photo: req.body.photo,
-        username: req.body.username
+        username: req.body.username,
+        nomLieu: req.body.nomLieu
     };
 
     const resultat = await request.insertReview(review);
