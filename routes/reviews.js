@@ -75,7 +75,7 @@ try {
     };
 
     const resultat = await request.insertReview(review);
-    return res.status(200).json(resultat);
+    return res.status(200).json(resultat[0]);
 } catch (error) {
     return res.status(500).json({ message: error.message });
 }
@@ -110,7 +110,7 @@ router.delete("/:idReviews", async(req, res) => {
         }
 
         await request.deleteReview(idReviews);
-        return res.status(200).json("Le review a été supprimé.");
+        return res.status(200).json({ message: "Le review a été supprimé." });
     } catch(error) {
         return res.status(500).json({ message: error.message });
     }
