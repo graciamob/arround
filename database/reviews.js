@@ -25,6 +25,11 @@ async function getReviewsUtilisateurParLieu(idUtilisateur, idLieu) {
     .andWhere("idLieu", idLieu);
 }
 
+async function getReviewsParUsername(username) {
+    return knex("Reviews")
+    .where("username", username);
+}
+
 // fonctions d'ajout
 async function insertReview(review) {
     return knex("Reviews")
@@ -40,6 +45,13 @@ function updateReview(review, idReviews) {
     .returning("*");
 }
 
+function updateUsernameReview(oldUsername, newUsername) {
+    return knex("Reviews")
+    .where("username", oldUsername)
+    .update({ username: newUsername })
+    .returning("*");
+}
+
 // fonctions de suppression
 async function deleteReview(idReviews) {
     return knex("Reviews")
@@ -52,7 +64,9 @@ module.exports = {
     getReviewsParId,
     getReviewsParLieu,
     getReviewsUtilisateurParLieu,
+    getReviewsParUsername,
     insertReview,
     updateReview,
+    updateUsernameReview,
     deleteReview,
 };

@@ -81,6 +81,22 @@ try {
 }
 });
 
+router.put("/username/:oldUsername/:newUsername", async(req, res) => {
+    const { oldUsername, newUsername } = req.params;
+
+    try {
+        const userReview = await request.getReviewsParUsername(oldUsername);
+        if (!userReview.length) {
+            return res.status(404).json({ message: "L'utilisateur n'a pas publié de reviews." });
+        }
+        
+        const resultat = await request.updateUsernameReview(oldUsername, newUsername);
+        return res.status(200).json(resultat);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+});
+
 router.delete("/:idReviews", async(req, res) => {
     const { idReviews } = req.params;
     if (!+(idReviews)) {
