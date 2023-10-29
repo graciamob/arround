@@ -91,7 +91,7 @@ router.put("/username/:oldUsername/:newUsername", async(req, res) => {
         }
         
         const resultat = await request.updateUsernameReview(oldUsername, newUsername);
-        return res.status(200).json(resultat);
+        return res.status(200).json(resultat[0]);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
