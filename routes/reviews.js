@@ -58,7 +58,7 @@ router.get("/utilisateur/:idUtilisateur", async(req, res) => {
 
 router.post("/", async(req, res) => {
     if (!req.body.date || !req.body.idUtilisateur || !req.body.idLieu || !req.body.commentaire
-        || !req.body.note) {
+        || !req.body.note || !req.body.username || !req.body.nomLieu) {
         return res.status(400).json({ message: "Paramètre(s) sont manquants" });
 }
 
@@ -69,14 +69,32 @@ try {
         idLieu: req.body.idLieu,
         commentaire: req.body.commentaire,
         note: req.body.note,
-        photo: req.body.photo
+        photo: req.body.photo,
+        username: req.body.username,
+        nomLieu: req.body.nomLieu
     };
 
     const resultat = await request.insertReview(review);
-    return res.status(200).json(resultat);
+    return res.status(200).json(resultat[0]);
 } catch (error) {
     return res.status(500).json({ message: error.message });
 }
+});
+
+router.put("/username/:oldUsername/:newUsername", async(req, res) => {
+    const { oldUsername, newUsername } = req.params;
+
+    try {
+        const userReview = await request.getReviewsParUsername(oldUsername);
+        if (!userReview.length) {
+            return res.status(404).json({ message: "L'utilisateur n'a pas publié de reviews." });
+        }
+        
+        const resultat = await request.updateUsernameReview(oldUsername, newUsername);
+        return res.status(200).json(resultat[0]);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
 });
 
 router.delete("/:idReviews", async(req, res) => {
@@ -92,7 +110,7 @@ router.delete("/:idReviews", async(req, res) => {
         }
 
         await request.deleteReview(idReviews);
-        return res.status(200).json("Le review a été supprimé.");
+        return res.status(200).json({ message: "Le review a été supprimé." });
     } catch(error) {
         return res.status(500).json({ message: error.message });
     }
