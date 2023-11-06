@@ -39,7 +39,7 @@ router.get("/utilisateur/:idUtilisateur/lieu/:idLieu", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    if (!req.body.idUtilisateur || !req.body.idLieu || !req.body.nomLieu || req.body.photoReference) {
+    if (!req.body.idUtilisateur || !req.body.idLieu || !req.body.nomLieu || !req.body.photoReference) {
         return res.status(400).json({ message: "Paramètre(s) sont manquants" });
     }
 
