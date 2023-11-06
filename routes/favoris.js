@@ -20,7 +20,7 @@ router.get("/utilisateur/:idUtilisateur", async (req, res) => {
     }
 });
 
-router.get("/utilisateur/:idUtilisateur/idLieu/:idLieu", async (req, res) => {
+router.get("/utilisateur/:idUtilisateur/lieu/:idLieu", async (req, res) => {
     const { idUtilisateur, idLieu } = req.params;
     if (!+(idUtilisateur) || idLieu == "") {
         return res.status(400).json({ message: "Paramètres invalides ou manquant." });
