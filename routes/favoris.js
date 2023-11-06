@@ -28,10 +28,10 @@ router.get("/utilisateur/:idUtilisateur/lieu/:idLieu", async (req, res) => {
     try {
         const resultat = await request.getFavoriPlaceUtilisateur(idUtilisateur, idLieu);
         if (!resultat.length) {
-            return false;
+            return res.status(404).json({ favori: false });
         }
 
-        return true;
+        return res.status(200).json({ favori: true });
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
