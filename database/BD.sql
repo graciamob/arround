@@ -51,7 +51,8 @@ CREATE TABLE [dbo].[Favoris](
 	[idFavoris] int primary key identity NOT NULL,
 	[idUtilisateur] int foreign key(idUtilisateur) References Utilisateurs(idUtilisateur) NOT NULL,
 	[idLieu] varchar(50) not null,
-	[nomLieu] varchar(80) not null
+	[nomLieu] varchar(80) not null,
+	[photoReference] varchar(200) not null
 )
 GO
 

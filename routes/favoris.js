@@ -21,7 +21,7 @@ router.get("/utilisateur/:idUtilisateur", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    if (!req.body.idUtilisateur || !req.body.idLieu || !req.body.nomLieu) {
+    if (!req.body.idUtilisateur || !req.body.idLieu || !req.body.nomLieu || req.body.photoReference) {
         return res.status(400).json({ message: "Paramètre(s) sont manquants" });
     }
 
@@ -29,7 +29,8 @@ router.post("/", async (req, res) => {
         const favori = {
             idUtilisateur: req.body.idUtilisateur,
             idLieu: req.body.idLieu,
-            nomLieu: req.body.nomLieu
+            nomLieu: req.body.nomLieu,
+            photoReference: req.body.photoReference
         };
 
         const resultat = await request.insertFavori(favori);
