@@ -20,6 +20,23 @@ router.get("/utilisateur/:idUtilisateur", async (req, res) => {
     }
 });
 
+router.get("/utilisateur/:idUtilisateur/idLieu/:idLieu", async (req, res) => {
+    const { idUtilisateur, idLieu } = req.params;
+    if (!+(idUtilisateur) || idLieu == "") {
+        return res.status(400).json({ message: "Paramètres invalides ou manquant." });
+    }
+    try {
+        const resultat = await request.getFavoriPlaceUtilisateur(idUtilisateur, idLieu);
+        if (!resultat.length) {
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+});
+
 router.post("/", async (req, res) => {
     if (!req.body.idUtilisateur || !req.body.idLieu || !req.body.nomLieu || req.body.photoReference) {
         return res.status(400).json({ message: "Paramètre(s) sont manquants" });

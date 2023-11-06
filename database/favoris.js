@@ -13,6 +13,12 @@ async function getFavoriParId(idFavoris) {
     .where("idFavoris", idFavoris);
 }
 
+async function getFavoriPlaceUtilisateur(idUtilisateur, idLieu) {
+    return knex("Favoris")
+    .where("idUtilisateur", idUtilisateur)
+    .andWhere("idLieu", idLieu);
+}
+
 async function insertFavori(favori) {
     return knex("Favoris")
     .insert(favori)
@@ -28,6 +34,7 @@ async function deleteFavori(idFavoris) {
 module.exports = {
     getFavorisUtilisateur,
     getFavoriParId,
+    getFavoriPlaceUtilisateur,
     insertFavori,
     deleteFavori
 };
