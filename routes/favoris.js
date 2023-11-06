@@ -26,11 +26,12 @@ router.get("/utilisateur/:idUtilisateur/lieu/:idLieu", async (req, res) => {
         return res.status(400).json({ message: "Paramètres invalides ou manquant." });
     }
     try {
+        const checkUtilisateur = await request.getFavorisUtilisateur(idUtilisateur);
+        if (!checkUtilisateur.length) return res.status(404).json({ message: "Cet utilisateur n'a pas de favoris." });
+        
         const resultat = await request.getFavoriPlaceUtilisateur(idUtilisateur, idLieu);
-        if (!resultat.length) {
-            return res.status(404).json({ favori: false, idFavoris: 0 });
-        }
-
+        if (!resultat.length) return res.status(200).json({ favori: false, idFavoris: 0 });
+        
         return res.status(200).json({ favori: true, idFavoris: resultat[0].idFavoris });
     } catch (error) {
         return res.status(500).json({ message: error.message });
