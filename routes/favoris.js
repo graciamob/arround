@@ -28,7 +28,7 @@ router.get("/utilisateur/:idUtilisateur/lieu/:idLieu", async (req, res) => {
     try {
         const resultat = await request.getFavoriPlaceUtilisateur(idUtilisateur, idLieu);
         if (!resultat.length) {
-            return res.status(404).json({ favori: false });
+            return res.status(404).json({ favori: false, idFavoris: 0 });
         }
 
         return res.status(200).json({ favori: true, idFavoris: resultat[0].idFavoris });
