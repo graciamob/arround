@@ -12,6 +12,7 @@ const photosRouter = require("./routes/photos");
 const reviewsRouter = require("./routes/reviews");
 const connexionRouter = require("./routes/connexion");
 const inscriptionRouter = require("./routes/inscription");
+const favorisRouter = require("./routes/favoris");
 
 app.use(express.static("public"));
 app.use(cors());
@@ -25,6 +26,7 @@ app.use("/utilisateurs", auth, utilisateursRouter);
 app.use("/categories", auth, categoriesRouter);
 app.use("/photos", auth, photosRouter);
 app.use("/reviews", auth, reviewsRouter);
+app.use("/favoris", auth, favorisRouter);
 
 app.listen(PORT, () => {
     console.log(`L'API peut maintenant recevoir des requêtes: http://localhost:${PORT}`);

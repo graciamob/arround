@@ -2,7 +2,7 @@ use [5D1gr01e03]
 
 CREATE TABLE [dbo].[Utilisateurs](
 	[idUtilisateur] int primary key identity NOT NULL,
-	[username] [varchar](50) NOT NULL,
+	[username] [varchar](50) NOT NULL unique,
 	[email] [varchar](50) NOT NULL unique,
 	[nom] [varchar](50) NOT NULL,
 	[motDePasse] [varchar](90) NOT NULL,
@@ -45,6 +45,14 @@ CREATE TABLE [dbo].[Reviews](
 	[username] varchar(50) not null,
 	[nomLieu] varchar(80) not null
 	)
+GO
+
+CREATE TABLE [dbo].[Favoris](
+	[idFavoris] int primary key identity NOT NULL,
+	[idUtilisateur] int foreign key(idUtilisateur) References Utilisateurs(idUtilisateur) NOT NULL,
+	[idLieu] varchar(50) not null,
+	[nomLieu] varchar(80) not null
+)
 GO
 
 insert into Categories values ('restaurant')

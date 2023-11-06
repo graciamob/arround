@@ -39,7 +39,7 @@ router.get("/utilisateur/:idUtilisateur", async(req, res) => {
 
 router.get("/utilisateur/:idUtilisateur/lieu/:idLieu", async(req, res) => {
     const { idUtilisateur, idLieu } = req.params;
-    if (!+(idUtilisateur) || !+(idLieu)) {
+    if (!+(idUtilisateur) || idLieu == "") {
         return res.status(400).json({ message: "Paramètre(s) invalide ou manquant." });
     }
     try {

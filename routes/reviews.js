@@ -60,25 +60,25 @@ router.post("/", async(req, res) => {
     if (!req.body.date || !req.body.idUtilisateur || !req.body.idLieu || !req.body.commentaire
         || !req.body.note || !req.body.username || !req.body.nomLieu) {
         return res.status(400).json({ message: "Paramètre(s) sont manquants" });
-}
+    }
 
-try {
-    const review = {
-        date: req.body.date,
-        idUtilisateur: req.body.idUtilisateur,
-        idLieu: req.body.idLieu,
-        commentaire: req.body.commentaire,
-        note: req.body.note,
-        photo: req.body.photo,
-        username: req.body.username,
-        nomLieu: req.body.nomLieu
-    };
+    try {
+        const review = {
+            date: req.body.date,
+            idUtilisateur: req.body.idUtilisateur,
+            idLieu: req.body.idLieu,
+            commentaire: req.body.commentaire,
+            note: req.body.note,
+            photo: req.body.photo,
+            username: req.body.username,
+            nomLieu: req.body.nomLieu
+        };
 
-    const resultat = await request.insertReview(review);
-    return res.status(200).json(resultat[0]);
-} catch (error) {
-    return res.status(500).json({ message: error.message });
-}
+        const resultat = await request.insertReview(review);
+        return res.status(200).json(resultat[0]);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
 });
 
 router.put("/username/:oldUsername/:newUsername", async(req, res) => {
