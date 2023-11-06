@@ -31,7 +31,7 @@ router.get("/utilisateur/:idUtilisateur/lieu/:idLieu", async (req, res) => {
             return res.status(404).json({ favori: false });
         }
 
-        return res.status(200).json({ favori: true });
+        return res.status(200).json({ favori: true, idFavoris: resultat[0].idFavoris });
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
