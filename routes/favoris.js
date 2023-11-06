@@ -3,7 +3,7 @@ const request = require("../database/favoris");
 
 const router = express.Router();
 
-router.get("/:idUtilisateur", async (req, res) => {
+router.get("/utilisateur/:idUtilisateur", async (req, res) => {
     const { idUtilisateur } = req.params;
     if (!+(idUtilisateur)) {
         return res.status(400).json({ message: "Paramètre invalide ou manquant." });
