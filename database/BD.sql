@@ -52,7 +52,7 @@ CREATE TABLE [dbo].[Favoris](
 	[idUtilisateur] int foreign key(idUtilisateur) References Utilisateurs(idUtilisateur) NOT NULL,
 	[idLieu] varchar(50) not null,
 	[nomLieu] varchar(80) not null,
-	[photoReference] varchar(200) null
+	[photoReference] varchar(250) null
 )
 GO
 
