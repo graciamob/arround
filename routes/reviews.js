@@ -116,6 +116,23 @@ router.post("/", async(req, res) => {
     }
 });
 
+router.get("/lieu/:idLieu/3", async(req, res) => {
+    const { idLieu } = req.params;
+    if (idLieu == "") {
+        return res.status(400).json({ message: "Paramètre invalide ou manquant." });
+    }
+    try {
+        const resultat = await request.getReviewsParLieu(idLieu);
+        if (!resultat.length) {
+            return res.status(404).json({ message: "Le lieu est introuvable." });
+        }
+
+        return res.status(200).json(resultat);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+});
+
 router.put("/username/:idUtilisateur/:newUsername", async(req, res) => {
     const { idUtilisateur, newUsername } = req.params;
 

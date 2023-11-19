@@ -46,6 +46,12 @@ async function getNbReviewsParNote(idLieu) {
       `, [idLieu]);
 }
 
+async function get3PremiersReviewsParLieu(idLieu) {
+    return knex("Reviews")
+    .where("idLieu", idLieu)
+    .limit(3);
+}
+
 // fonctions d'ajout
 async function insertReview(review) {
     return knex("Reviews")
@@ -82,6 +88,7 @@ module.exports = {
     getReviewsUtilisateurParLieu,
     getReviewsParUserId,
     getNbReviewsParNote,
+    get3PremiersReviewsParLieu,
     insertReview,
     updateReview,
     updateUsernameReview,
