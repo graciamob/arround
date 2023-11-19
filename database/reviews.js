@@ -30,6 +30,22 @@ async function getReviewsParUserId(idUtilisateur) {
     .where("idUtilisateur", idUtilisateur);
 }
 
+async function getNbReviewsParNote(idLieu) {
+    return knex.raw(`
+        SELECT n.note, COALESCE(COUNT(r.note), 0) as nombre_de_notes
+        FROM (
+            SELECT 5 as note
+            UNION SELECT 4
+            UNION SELECT 3
+            UNION SELECT 2
+            UNION SELECT 1
+        ) n
+        LEFT JOIN Reviews r ON n.note = r.note AND r.idLieu = ?
+        GROUP BY n.note
+        ORDER BY n.note DESC;
+      `, [idLieu]);
+}
+
 // fonctions d'ajout
 async function insertReview(review) {
     return knex("Reviews")
@@ -65,6 +81,7 @@ module.exports = {
     getReviewsParLieu,
     getReviewsUtilisateurParLieu,
     getReviewsParUserId,
+    getNbReviewsParNote,
     insertReview,
     updateReview,
     updateUsernameReview,
