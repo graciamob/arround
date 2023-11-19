@@ -56,6 +56,24 @@ router.get("/utilisateur/:idUtilisateur", async(req, res) => {
     }
 });
 
+router.get("/utilisateur/:idUtilisateur/lieu/:idLieu", async(req, res) => {
+    const { idUtilisateur, idLieu } = req.params;
+    if (!+(idUtilisateur) || idLieu == "") {
+        return res.status(400).json({ message: "Paramètres invalides ou manquant." });
+    }
+    try {
+        const checkUtilisateur = await request.getReviewsUtilisateur(idUtilisateur);
+        if (!checkUtilisateur.length) return res.status(404).json({ message: "Cet utilisateur n'a pas d'avis." });
+        
+        const resultat = await request.getReviewsUtilisateurParLieu(idUtilisateur, idLieu);
+        if (!resultat.length) return res.status(200).json({ review: false });
+        
+        return res.status(200).json({ review: true });
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+});
+
 router.post("/", async(req, res) => {
     if (!req.body.date || !req.body.idUtilisateur || !req.body.idLieu || !req.body.commentaire
         || !req.body.note || !req.body.username || !req.body.nomLieu) {
@@ -81,16 +99,20 @@ router.post("/", async(req, res) => {
     }
 });
 
-router.put("/username/:oldUsername/:newUsername", async(req, res) => {
-    const { oldUsername, newUsername } = req.params;
+router.put("/username/:idUtilisateur/:newUsername", async(req, res) => {
+    const { idUtilisateur, newUsername } = req.params;
+
+    if (!+(idUtilisateur) || newUsername == "") {
+        return res.status(400).json({ message: "Paramètres invalides ou manquant." });
+    }
 
     try {
-        const userReview = await request.getReviewsParUsername(oldUsername);
+        const userReview = await request.getReviewsParUserId(idUtilisateur);
         if (!userReview.length) {
-            return res.status(404).json({ message: "L'utilisateur n'a pas publié de reviews." });
+            return res.status(404).json({ message: "L'utilisateur n'a pas publié d'avis." });
         }
         
-        const resultat = await request.updateUsernameReview(oldUsername, newUsername);
+        const resultat = await request.updateUsernameReview(idUtilisateur, newUsername);
         return res.status(200).json(resultat[0]);
     } catch (error) {
         return res.status(500).json({ message: error.message });

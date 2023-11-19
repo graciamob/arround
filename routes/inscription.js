@@ -14,8 +14,7 @@ router.post("/", async(req, res) => {
             username: req.body.username,
             email: req.body.email,
             nom: req.body.nom,
-            motDePasse: bcrypt.hashSync(req.body.motDePasse, 10),
-            photoProfil: req.body.photoProfil
+            motDePasse: bcrypt.hashSync(req.body.motDePasse, 10)
         };
 
         const resultat = await request.insertUtilisateur(utilisateur);
