@@ -39,6 +39,39 @@ async function deleteUtilisateur(idUtilisateur){
     .where("idUtilisateur", idUtilisateur)
     .del();
 }
+const admin = require("firebase-admin");
+
+const bucket = admin.storage().bucket();
+
+async function deleteAccount(idUtilisateur) {
+    try {
+        // Récupérer les informations de l'utilisateur
+        const utilisateur = await knex("Utilisateurs")
+                                  .where("idUtilisateur", idUtilisateur)
+                                  .first();
+
+        if (utilisateur) {
+            // Supprimer la photo de profil de Firebase
+            if (utilisateur.photoProfil) {
+                const file = bucket.file(utilisateur.photoProfil);
+                await file.delete();
+            }
+
+            
+            await knex("Reviews")
+                  .where("idUtilisateur", idUtilisateur)
+                  .update({ idUtilisateur: null, nom: "Utilisateur supprimé" });
+
+            // Supprimer l'utilisateur de la base de données
+            await knex("Utilisateurs")
+                  .where("idUtilisateur", idUtilisateur)
+                  .del();
+        }
+    } catch (error) {
+        // Gestion des erreurs
+    }
+}
+
 
 module.exports = {
     getUtilisateursAll,
@@ -47,4 +80,6 @@ module.exports = {
     insertUtilisateur,
     updateUtilisateur,
     deleteUtilisateur,
+    deleteAccount
+
 };

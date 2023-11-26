@@ -75,4 +75,19 @@ router.delete("/:idUtilisateur", async(req, res) => {
     }
 });
 
+router.delete("/deleteAccount/:idUtilisateur",async(req,res)=>{
+    const { idUtilisateur } = req.body.idUtilisateur;
+    try{
+        const result =await request.deleteAccount(idUtilisateur);
+        if(result.success){
+        res.status(200).send(result);
+    }
+
+    }catch(error){
+        res.status(500).json({ message: error.message });
+    }
+
+
+});
+
 module.exports = router;
