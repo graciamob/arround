@@ -39,6 +39,7 @@ async function deleteUtilisateur(idUtilisateur){
     .where("idUtilisateur", idUtilisateur)
     .del();
 }
+/*
 const admin = require("firebase-admin");
 
 const bucket = admin.storage().bucket();
@@ -70,7 +71,7 @@ async function deleteAccount(idUtilisateur) {
     } catch (error) {
         // Gestion des erreurs
     }
-}
+}*/
 
 
 module.exports = {
@@ -80,6 +81,6 @@ module.exports = {
     insertUtilisateur,
     updateUtilisateur,
     deleteUtilisateur,
-    deleteAccount
+  //  deleteAccount
 
 };
