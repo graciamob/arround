@@ -5,8 +5,7 @@ CREATE TABLE [dbo].[Utilisateurs](
 	[username] [varchar](50) NOT NULL unique,
 	[email] [varchar](50) NOT NULL unique,
 	[nom] [varchar](50) NOT NULL,
-	[motDePasse] [varchar](90) NOT NULL,
-	[photoProfil] [varchar](90) NULL
+	[motDePasse] [varchar](90) NOT NULL
 )
 GO
 
@@ -41,7 +40,6 @@ CREATE TABLE [dbo].[Reviews](
 	[idLieu] varchar(50) not null,
 	[commentaire] [varchar](150) NOT NULL,
 	[note] int check (note in (1, 2, 3, 4, 5)) not null,
-	[photo] [varchar](50) NULL,
 	[username] varchar(50) not null,
 	[nomLieu] varchar(80) not null
 	)

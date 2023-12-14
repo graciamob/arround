@@ -104,7 +104,6 @@ router.post("/", async(req, res) => {
             idLieu: req.body.idLieu,
             commentaire: req.body.commentaire,
             note: req.body.note,
-            photo: req.body.photo,
             username: req.body.username,
             nomLieu: req.body.nomLieu
         };
