@@ -122,7 +122,7 @@ router.get("/lieu/:idLieu/3", async(req, res) => {
         return res.status(400).json({ message: "Paramètre invalide ou manquant." });
     }
     try {
-        const resultat = await request.getReviewsParLieu(idLieu);
+        const resultat = await request.get3PremiersReviewsParLieu(idLieu);
         if (!resultat.length) {
             return res.status(404).json({ message: "Le lieu est introuvable." });
         }
